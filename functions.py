@@ -8,6 +8,7 @@ import torch
 import math
 import utils
 
+### Data Loading ###
 class Lang():
     def __init__(self, corpus, special_tokens=[]):
         self.word2id = self.get_vocab(corpus, special_tokens)
@@ -75,7 +76,8 @@ def build_dataloaders(train_data_path, val_data_path, test_data_path):
     test_loader = DataLoader(test_dataset, batch_size=1024, collate_fn=partial(collate_fn, pad_token=lang.word2id["<pad>"]))
 
     return vocab_length, train_loader, dev_loader, test_loader, padding
-  
+
+### Model training and evaluation ###
 def train_loop(data, optimizer, criterion, model, clip=5):
     model.train()
     loss_array = []
